@@ -18,7 +18,6 @@ export default class Character {
 
   getAttack(x) {
     this.attack -= Math.round(this.attack * ((x - 1) / 10));
-    return this.attack;
   }
 
   setAttack(x) {
@@ -30,5 +29,6 @@ export default class Character {
     } else {
       this.getAttack(x);
     }
+    return this.attack;
   }
 }
