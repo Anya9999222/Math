@@ -1,34 +1,26 @@
 export default class Character {
-  constructor(name, type, stoned = false) {
+  constructor(name, distance) {
     this.name = name;
-    this.type = type;
-    this.attack = undefined;
-    this.defence = undefined;
-    this.stoned = stoned;
+    this.distance = distance;
   }
 
-  getStoned() {
-    this.stoned = true;
+  get stoned() {
+    return this._stoned
   }
 
-  setStoned(x) {
-    this.attack -= Math.log2(x) * 5;
-    this.getAttack(x);
+  set stoned(x) {
+    this._stoned = x;
   }
 
-  getAttack(x) {
-    this.attack -= Math.round(this.attack * ((x - 1) / 10));
-  }
-
-  setAttack(x) {
-    if ((this.type !== 'Daemon' && this.type !== 'Magician') || x < 1 || x > 5) {
-      return 'method works with daemon and magician only';
+  get attack() {
+    this._attack -= this._attack * ((this.distance - 1) / 10);
+    if(this._stoned){
+      this._attack -= Math.log2(this.distance) * 5;
     }
-    if (this.stoned === true) {
-      this.setStoned(x);
-    } else {
-      this.getAttack(x);
-    }
-    return this.attack;
+    return this._attack
+  }
+
+  set attack(x) {
+    this._attack = x;
   }
 }

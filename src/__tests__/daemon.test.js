@@ -3,16 +3,19 @@ import Daemon from '../js/daemon';
 let daemon;
 
 beforeEach(() => {
-  daemon = new Daemon('Anya');
+  daemon = new Daemon('Anya', 2);
 });
 
 it('make usual attack', () => {
-  daemon.setAttack(2);
   expect(daemon.attack).toBe(90);
 });
 
 it('make stoned attack', () => {
-  daemon.getStoned();
-  daemon.setAttack(2);
+  daemon.stoned = true;
   expect(daemon.attack).toBe(85);
+});
+
+it('make stoned', () => {
+  daemon.stoned = true;
+  expect(daemon.stoned).toBe(true);
 });
